@@ -6,6 +6,8 @@ if(isset($_SESSION['username'])) {
     // Display the Logout link or button
     echo '<a href="../src/features/logout.php">Logout</a>';
 }
+
+$livesUsed = isset($_SESSION['livesUsed']) ? $_SESSION['livesUsed'] : 6;
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +87,10 @@ for ($i = 0; $i < 6; $i++) {
         echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '" ><br>';
     }
     ?>
+
+    <!-- Display number of lives used -->
+<p>Lives used: <?php echo $livesUsed; ?></p>
+
     <!-- Error message -->
     <?php
     if (isset($_SESSION['error_message'])) {

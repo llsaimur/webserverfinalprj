@@ -17,6 +17,8 @@ $shuffledLetters = array_slice($letters, 0, 6); // Select only the first 6 shuff
 
 // Store the shuffled letters in the session for validation
 $_SESSION['shuffledLetters'] = $shuffledLetters;
+
+$livesUsed = isset($_SESSION['livesUsed']) ? $_SESSION['livesUsed'] : 6;
 ?>
 
 <!DOCTYPE html>
@@ -78,6 +80,9 @@ if(isset($_SESSION['username'])) {
 <!-- Display the letters to be sorted -->
 <h2>Letters to be sorted: </h2></br>
 <h3> <?php echo implode(', ', $shuffledLetters); ?></h3>
+
+<!-- Display number of lives used -->
+<p>Lives used: <?php echo $livesUsed; ?></p>
 
 <!-- Display error message if exists -->
 <?php if (!empty($error)) : ?>

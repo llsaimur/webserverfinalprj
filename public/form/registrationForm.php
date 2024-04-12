@@ -60,13 +60,19 @@
     <div id="usernameError"></div>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
+    <input type="password" id="password" name="password" required onkeyup="validatePasswordName(this.value)"><br><br>
+    <div id="passwordError"></div>
 
     <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+    <input type="password" id="confirmPassword" name="confirmPassword" required onkeyup="validateconfirmPasswordName(this.value)">
+    <div id="confirmPasswordError"></div>
+
+    
+
 
     <input type="submit" value="Register" name="register">
-    <!-- <button type="button" onclick="location.href='login.php';">Login</button>  -->
+    <button type="button" onclick="location.href='login.php';">Back</button>
+    
 </form>
 <div id="registrationMessage"></div> <!-- Display registration messages -->
 </div>

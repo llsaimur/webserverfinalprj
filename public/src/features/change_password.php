@@ -26,6 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              $errorMessage = "Error changing password. Please try again.";
         }
     }
+     // If the form is submitted with the "Cancel" button
+     elseif (isset($_POST['cancel'])) {
+        // Redirect to the login page
+        header("Location: ../../form/login.php");
+        exit;
+    }
 }
 
 // Function to update password in the database

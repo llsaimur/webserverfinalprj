@@ -16,6 +16,8 @@ if(isset($_SESSION['username'])) {
 session_start();
 // Generate and store the random set of letters in the session
 $_SESSION['givenLetters'] = generateRandomLetters();
+
+$livesUsed = isset($_SESSION['livesUsed']) ? $_SESSION['livesUsed'] : 6;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +84,9 @@ if(isset($_SESSION['username'])) {
     
     <label for="largestLetter">Last (largest) letter:</label>
     <input type="text" id="largestLetter" name="largestLetter" maxlength="1" >
+
+    <!-- Display number of lives used -->
+<p>Lives used: <?php echo $livesUsed; ?></p>
 
     <!-- Error message -->
     <?php

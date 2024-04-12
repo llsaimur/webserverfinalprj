@@ -13,6 +13,16 @@ function validateLastName(lastName) {
     sendRequest('../src/functions/signup-onkeyup/validate_lastname.php', 'lastName=' + encodeURIComponent(lastName));
 }
 
+// Function to send AJAX request for validating password
+function validatePasswordName(password) {
+    sendRequest('../src/functions/signup-onkeyup/validate_password.php', 'password=' + encodeURIComponent(password));
+}
+
+// Function to send AJAX request for validating confirm password
+function validateconfirmPasswordName(confirmPassword) {
+    sendRequest('../src/functions/signup-onkeyup/validate_confirmPassword.php', 'confirmPassword=' + encodeURIComponent(confirmPassword));
+}
+
 // Generic function to send AJAX request
 function sendRequest(url, data) {
     var xhr = new XMLHttpRequest();
@@ -24,6 +34,8 @@ function sendRequest(url, data) {
                 handleResponse(response);
             } else {
                 console.error('Error:', xhr.status);
+                // Handle error
+                handleResponse({ valid: false, fieldName: '', message: 'An error occurred. Please try again later.' });
             }
         }
     };
@@ -35,9 +47,9 @@ function sendRequest(url, data) {
 // Function to handle the response
 function handleResponse(response) {
     // Display the validation result
-    var message = response.valid ? "" : response.message;
+    var message = response.valid ? '' : response.message;
     var fieldName = response.fieldName;
-    var errorElement = document.getElementById(fieldName + "Error");
+    var errorElement = document.getElementById(fieldName + 'Error');
     if (errorElement) {
         errorElement.textContent = message;
     }

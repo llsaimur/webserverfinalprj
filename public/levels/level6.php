@@ -24,6 +24,8 @@ function generateRandomNumbers() {
 
 // Generate and store the random set of numbers in the session
 $_SESSION['givenNumbers'] = generateRandomNumbers();
+
+$livesUsed = isset($_SESSION['livesUsed']) ? $_SESSION['livesUsed'] : 6;
 ?>
 
 <!DOCTYPE html>
@@ -91,6 +93,9 @@ if(isset($_SESSION['username'])) {
     
     <label for="largestNumber">Largest number:</label>
     <input type="number" id="largestNumber" name="largestNumber" >
+
+    <!-- Display number of lives used -->
+<p>Lives used: <?php echo $livesUsed; ?></p>
 
      <!-- Error message -->
      <?php

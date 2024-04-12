@@ -49,12 +49,13 @@
     <input type="text" id="lastName" name="lastName" required><br><br> -->
 
     <label for="newPassword">New Password:</label>
-    <input type="password" id="newPassword" name="newPassword" required><br><br>
+    <input type="password" id="newPassword" name="newPassword" ><br><br>
 
     <label for="confirmNewPassword">Confirm New Password:</label>
-    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required><br><br>
+    <input type="password" id="confirmNewPassword" name="confirmNewPassword" ><br><br>
 
     <input type="submit" value="Edit" name="edit">
+    <input type="submit" value="Cancel" name="cancel">
     
 </form>
 </div>
