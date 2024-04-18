@@ -47,25 +47,26 @@
 <h1>User Registration</h1>
 <form id="registrationForm" action="../src/features/register.php" method="post">
     <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required onkeyup="validateFirstName(this.value)"><br><br>
+    <input type="text" id="firstName" name="firstName" required onkeyup="validateFirstName(this.value)">
     <div id="firstNameError"></div>
 
 
     <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required onkeyup="validateLastName(this.value)"><br><br>
+    <input type="text" id="lastName" name="lastName" required onkeyup="validateLastName(this.value)">
     <div id="lastNameError"></div>
 
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required onkeyup="validateUsername(this.value)"><br><br>
+    <input type="text" id="username" name="username" required onkeyup="validateUsername(this.value)">
     <div id="usernameError"></div>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required onkeyup="validatePasswordName(this.value)"><br><br>
+    <input type="password" id="password" name="password" required onkeyup="validatePasswordName(this.value)">
     <div id="passwordError"></div>
 
     <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required onkeyup="validateconfirmPasswordName(this.value)">
+    <input type="password" id="confirmPassword" name="confirmPassword" required onkeyup="validateConfirmPasswordName(this.value)">
     <div id="confirmPasswordError"></div>
+
 
     
 

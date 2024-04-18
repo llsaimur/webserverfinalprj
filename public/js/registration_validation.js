@@ -3,6 +3,13 @@ function validateUsername(username) {
     sendRequest('../src/functions/signup-onkeyup/validate_username.php', 'username=' + encodeURIComponent(username));
 }
 
+// Function to send AJAX request for validating confirm password
+function validateConfirmPasswordName(confirmPassword) {
+    var password = document.getElementById('password').value; // Get the value of the password field
+    sendRequest('../src/functions/signup-onkeyup/validate_confirmPassword.php', 'password=' + encodeURIComponent(password) + '&confirmPassword=' + encodeURIComponent(confirmPassword));
+}
+
+
 // Function to send AJAX request for validating first name
 function validateFirstName(firstName) {
     sendRequest('../src/functions/signup-onkeyup/validate_firstname.php', 'firstName=' + encodeURIComponent(firstName));
@@ -18,10 +25,9 @@ function validatePasswordName(password) {
     sendRequest('../src/functions/signup-onkeyup/validate_password.php', 'password=' + encodeURIComponent(password));
 }
 
-// Function to send AJAX request for validating confirm password
-function validateconfirmPasswordName(confirmPassword) {
-    sendRequest('../src/functions/signup-onkeyup/validate_confirmPassword.php', 'confirmPassword=' + encodeURIComponent(confirmPassword));
-}
+
+
+
 
 // Generic function to send AJAX request
 function sendRequest(url, data) {

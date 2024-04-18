@@ -56,16 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['currentLevel']++;
             header("Location: ../../levels/level{$_SESSION['currentLevel']}.php");
             exit;
-        } else {
-            // Game completed successfully
-            // Record "Win" in the database
-            recordResult("Win", $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
-            // Display win message to the user
-            $message = "Congratulations! You have successfully completed the game.";
-            // Redirect to win page
-            header("Location: win.php");
-            exit;
-        }
+        } 
+
     } else {
         // User's input is invalid
         // Deduct a life
@@ -118,7 +110,6 @@ function getCurrentUserRegistrationOrder() {
 }
 
 
-// Function to record the result in the database
 // Function to record the result in the database
 function recordResult($outcome, $livesUsed, $registrationOrder) {
     // Database connection parameters

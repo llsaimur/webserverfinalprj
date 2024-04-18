@@ -17,8 +17,12 @@ $_SESSION = array();
 // Destroy the session
 session_destroy();
 
+// Display success message
+echo '<script>alert("Successfully logged out, game is over!");</script>';
+
 // Redirect to the home page
-header("Location: ../../../index.php");
+echo '<script>setTimeout(function(){ window.location.href = "../../form/login.php"; }, 1000);</script>';
+
 exit;
 
 

@@ -36,16 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['currentLevel']++;
             header("Location: ../../levels/level{$_SESSION['currentLevel']}.php");
             exit;
-        } else {
-            // Game completed successfully
-            // Record "Win" in the database
-            recordResult("Win", $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
-            // Display win message to the user
-            $message = "Congratulations! You have successfully completed the game.";
-            // Redirect to win page
-            header("Location: win.php");
-            exit;
-        }
+        } 
+        
     } else {
         // User's input is invalid
         $_SESSION['error_message'] = "Invalid input! Please enter numbers in descending order.";
