@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // If lives become zero, record game over and redirect
         if ($_SESSION['livesUsed'] == 0) {
             recordResult("Game Over", 6 - $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
-            header("Location: ../../levels/gameover.php");
+            header("Location: ../../message/gameover.php");
             exit;
         }
         

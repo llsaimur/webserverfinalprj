@@ -46,11 +46,20 @@ function recordResult($outcome, $livesUsed, $registrationOrder) {
         // Set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
+        // Map the outcome to the appropriate database value
+        if ($outcome == "Win") {
+            $result = "win";
+        } elseif ($outcome == "Game Over") {
+            $result = "gameover";
+        } else {
+            $result = "incomplete"; // For incomplete games
+        }
+
         // Prepare the SQL statement
         $stmt = $conn->prepare("INSERT INTO score (scoreTime, result, livesUsed, registrationOrder) VALUES (NOW(), :result, :livesUsed, :registrationOrder)");
         
         // Bind the parameters
-        $stmt->bindParam(':result', $outcome);
+        $stmt->bindParam(':result', $result);
         $stmt->bindParam(':livesUsed', $livesUsed);
         $stmt->bindParam(':registrationOrder', $registrationOrder);
         
@@ -68,6 +77,7 @@ function recordResult($outcome, $livesUsed, $registrationOrder) {
         return false;
     }
 }
+
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

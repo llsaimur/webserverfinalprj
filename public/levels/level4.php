@@ -8,6 +8,19 @@ if(isset($_SESSION['username'])) {
 }
 
 $livesUsed = isset($_SESSION['livesUsed']) ? $_SESSION['livesUsed'] : 6;
+
+// Function to generate random numbers and store them in the session
+function generateRandomNumbers() {
+    $randomNumbers = [];
+    for ($i = 0; $i < 6; $i++) {
+        $number = rand(0, 100);
+        array_push($randomNumbers, $number);
+    }
+    $_SESSION['randomNumbers'] = $randomNumbers;
+}
+
+// Generate and store random numbers in the session if not already generated
+generateRandomNumbers();
 ?>
 
 <!DOCTYPE html>
@@ -68,15 +81,15 @@ if(isset($_SESSION['username'])) {
 
 <!-- Display the 6 random numbers -->
 <h2>Numbers:</h2>
-<?php
-// Generate and display 6 random numbers
-$numbers = [];
-for ($i = 0; $i < 6; $i++) {
-    $number = rand(0, 100);
-    array_push($numbers, $number);
-    echo $number . ' ';
-}
-?>
+<!-- Display number of lives used -->
+<p>Lives left: <?php echo $livesUsed; ?></p>
+        
+        <?php
+        // Display random numbers from the session
+        foreach ($_SESSION['randomNumbers'] as $number) {
+            echo $number . ' ';
+        }
+        ?>
 
 <form action="../src/functions/level4_process.php" method="post">
     <!-- Input fields for 6 numbers -->
@@ -84,7 +97,7 @@ for ($i = 0; $i < 6; $i++) {
     // Display input fields for the 6 numbers
     for ($i = 0; $i < 6; $i++) {
         echo '<label for="number' . ($i + 1) . '">Number ' . ($i + 1) . ':</label>';
-        echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '" required><br>';
+        echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '" ><br>';
     }
     ?>
 

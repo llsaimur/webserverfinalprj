@@ -19,9 +19,9 @@ if (!isset($_SESSION['currentLevel'])) {
 }
 
 // Generate random numbers if not already generated
-if (!isset($_SESSION['randomNumbers'])) {
-    $_SESSION['randomNumbers'] = generateRandomNumbers();
-}
+// if (!isset($_SESSION['randomNumbers'])) {
+//     $_SESSION['randomNumbers'] = generateRandomNumbers();
+// }
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,11 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } 
         
     } else {
+       // User's input is invalid
+        // Deduct a life
         $_SESSION['livesUsed']--;
         // If lives become zero, record game over and redirect
         if ($_SESSION['livesUsed'] == 0) {
             recordResult("Game Over", 6 - $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
-            header("Location: ../../levels/gameover.php");
+            header("Location: ../../message/gameover.php");
             exit;
         }
         // User's input is invalid
@@ -60,6 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 }
+
+// // Function to generate random numbers and store them in the session
+// function generateRandomNumbers() {
+//     $randomNumbers = [];
+//     for ($i = 0; $i < 6; $i++) {
+//         $number = rand(1, 100);
+//         array_push($randomNumbers, $number);
+//     }
+//     return $randomNumbers;
+// }
 
 // Function to retrieve the registration order of the current user
 function getCurrentUserRegistrationOrder() {
@@ -106,11 +118,20 @@ function recordResult($outcome, $livesUsed, $registrationOrder) {
         // Set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
+        // Map the outcome to the appropriate database value
+        if ($outcome == "Win") {
+            $result = "win";
+        } elseif ($outcome == "Game Over") {
+            $result = "gameover";
+        } else {
+            $result = "incomplete"; // For incomplete games
+        }
+
         // Prepare the SQL statement
         $stmt = $conn->prepare("INSERT INTO score (scoreTime, result, livesUsed, registrationOrder) VALUES (NOW(), :result, :livesUsed, :registrationOrder)");
         
         // Bind the parameters
-        $stmt->bindParam(':result', $outcome);
+        $stmt->bindParam(':result', $result);
         $stmt->bindParam(':livesUsed', $livesUsed);
         $stmt->bindParam(':registrationOrder', $registrationOrder);
         
@@ -129,15 +150,28 @@ function recordResult($outcome, $livesUsed, $registrationOrder) {
     }
 }
 
-// Function to validate the user's input (example)
+
+// Function to validate the user's input
 function validateNumbers($numbers) {
-    // Implement validation logic here
-    // Example: Check if the numbers are in ascending order
-    for ($i = 0; $i < 5; $i++) {
-        if ($numbers[$i] > $numbers[$i + 1]) {
-            return false;
+    // Retrieve the random numbers from the session
+    $randomNumbers = $_SESSION['randomNumbers'];
+    
+    // Check if the input contains only numbers and if the numbers match the ones generated
+    foreach ($numbers as $number) {
+        if (!is_numeric($number) || !in_array($number, $randomNumbers)) {
+            return false; // Contains non-numeric value or number not in random numbers
         }
     }
-    return true;
+    
+    // Check if the numbers are in ascending order
+    for ($i = 0; $i < count($numbers) - 1; $i++) {
+        if ($numbers[$i] > $numbers[$i + 1]) {
+            return false; // Not in ascending order
+        }
+    }
+    
+    return true; // Valid input
 }
+
+
 ?>
