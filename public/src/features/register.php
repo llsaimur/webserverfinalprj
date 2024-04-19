@@ -1,5 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Messages</title>
+    <link rel="stylesheet"  href="https://unpkg.com/mvp.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet"> 
+    <style>
+        body {
+            background-image: url('https://thumbs.dreamstime.com/b/childish-animals-seamless-pattern-cute-summer-wild-fauna-background-kids-jungle-wildlife-cartoon-safari-zoo-tropical-nursery-215880786.jpg');
+            background-repeat: repeat;
+            background-attachment: fixed;
+            font-family: 'Caveat Brush',cursive;
+        }
+        
+        .error-container {
+            margin: 20px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7; 
+            color: #842029; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+
+        .error-message {
+            font-size: 16px;
+            line-height: 1.5; 
+        }
+    </style>
+</head>
+<body>
 <?php
-// Establish database connection (Replace placeholders with actual values)
+// Establish database connection 
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -66,9 +101,18 @@ if (empty($errors)) {
         echo "Error inserting user: " . $sql . "<br>" . $conn->error;
     }
 } else {
+    echo '<div style="text-align: center; font-size: 24px; color: #ff0000; border: 6px solid #ff0000;">';
     foreach ($errors as $error) {
         echo $error . "<br>";
     }
+    echo "</div>";
+    
+    echo "<meta http-equiv='refresh' content='3;url=../../form/registrationForm.php'>";
+    echo '<script>alert("Registration unsuccessful, the page will refresh automatically in 3 seconds. Try again!");</script>';
+    
+
 }
 $conn->close();
 ?>
+</body>
+</html>
