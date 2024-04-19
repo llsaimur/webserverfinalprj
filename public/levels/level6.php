@@ -95,7 +95,7 @@ if(isset($_SESSION['username'])) {
     <input type="number" id="largestNumber" name="largestNumber" >
 
     <!-- Display number of lives used -->
-<p>Lives used: <?php echo $livesUsed; ?></p>
+<p>Lives left: <?php echo $livesUsed; ?></p>
 
      <!-- Error message -->
      <?php

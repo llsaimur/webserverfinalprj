@@ -39,6 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } 
         
     } else {
+        $_SESSION['livesUsed']--;
+        // If lives become zero, record game over and redirect
+        if ($_SESSION['livesUsed'] == 0) {
+            recordResult("Game Over", 6 - $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
+            header("Location: ../../levels/gameover.php");
+            exit;
+        }
         // User's input is invalid
         $_SESSION['error_message'] = "Invalid input! Please enter numbers in descending order.";
         // Redirect back to the same level

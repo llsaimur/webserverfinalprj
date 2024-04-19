@@ -11,6 +11,10 @@ if (!isset($_SESSION['registrationOrder'])) {
 
 // Function to check if the user's input matches the first and last letters from the given set
 function validateLetters($givenLetters, $firstLetter, $lastLetter) {
+     // Convert input letters to lowercase or uppercase
+     $givenLetters = strtoupper($givenLetters); // Convert to uppercase
+     $firstLetter = strtoupper($firstLetter); // Convert to uppercase
+     $lastLetter = strtoupper($lastLetter); // Convert to uppercase
     // Sort the given letters
     $sortedLetters = str_split($givenLetters);
     sort($sortedLetters);
@@ -85,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // If lives become zero, record game over and redirect
         if ($_SESSION['livesUsed'] == 0) {
             // Record "Game Over" in the database
-            recordResult("Game Over", $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
+            recordResult("Game Over", 6 - $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
             // Redirect to game over page
             header("Location: ../../message/gameover.php");
             exit;

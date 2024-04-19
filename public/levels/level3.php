@@ -62,6 +62,9 @@ if(isset($_SESSION['username'])) {
 
 <!-- Display the 6 random numbers -->
 <h2>Numbers:</h2>
+
+    <!-- Display number of lives used -->
+    <p>Lives left: <?php echo $livesUsed; ?></p>
 <?php
 // Generate and display 6 random numbers
 $numbers = [];
@@ -78,12 +81,11 @@ for ($i = 0; $i < 6; $i++) {
     // Display input fields for the 6 numbers
     for ($i = 0; $i < 6; $i++) {
         echo '<label for="number' . ($i + 1) . '">Number ' . ($i + 1) . ':</label>';
-        echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '" ><br>';
+        echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '"  required><br>';
     }
     ?>
 
-    <!-- Display number of lives used -->
-<p>Lives used: <?php echo $livesUsed; ?></p>
+
 
     <!-- Error message -->
     <?php

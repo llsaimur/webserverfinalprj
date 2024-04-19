@@ -84,7 +84,7 @@ for ($i = 0; $i < 6; $i++) {
     // Display input fields for the 6 numbers
     for ($i = 0; $i < 6; $i++) {
         echo '<label for="number' . ($i + 1) . '">Number ' . ($i + 1) . ':</label>';
-        echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '" ><br>';
+        echo '<input type="text" id="number' . ($i + 1) . '" name="number' . ($i + 1) . '" required><br>';
     }
     ?>
 

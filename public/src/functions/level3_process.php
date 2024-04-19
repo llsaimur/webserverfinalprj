@@ -8,12 +8,19 @@ if (!isset($_SESSION['registrationOrder'])) {
     exit;
 }
 
+
+
 // Initialize session variables for a new game if not already set
 if (!isset($_SESSION['currentLevel'])) {
     $_SESSION['currentLevel'] = 1;
     $_SESSION['totalLevels'] = 6; // Assuming there are 6 levels in the game
     $_SESSION['livesUsed'] = 6; // Initial number of lives for each game
     $_SESSION['registrationOrder'] = getCurrentUserRegistrationOrder(); // Get registration order of the current user
+}
+
+// Generate random numbers if not already generated
+if (!isset($_SESSION['randomNumbers'])) {
+    $_SESSION['randomNumbers'] = generateRandomNumbers();
 }
 
 // Check if the form is submitted
@@ -39,6 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } 
         
     } else {
+        $_SESSION['livesUsed']--;
+        // If lives become zero, record game over and redirect
+        if ($_SESSION['livesUsed'] == 0) {
+            recordResult("Game Over", 6 - $_SESSION['livesUsed'], $_SESSION['registrationOrder']);
+            header("Location: ../../levels/gameover.php");
+            exit;
+        }
         // User's input is invalid
         $_SESSION['error_message'] = "Invalid input! Please enter numbers in ascending order.";
         // Redirect back to the same level
